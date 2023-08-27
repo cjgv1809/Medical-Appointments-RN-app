@@ -8,6 +8,7 @@
 import React, { useState } from "react";
 import {
   Alert,
+  Modal,
   Pressable,
   SafeAreaView,
   StatusBar,
@@ -19,12 +20,14 @@ import {
 import Form from "./src/components/Form";
 import { FlatList } from "react-native";
 import Patient from "./src/components/Patient";
+import PatientInfo from "./src/components/PatientInfo";
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === "dark";
   const [modalVisible, setModalVisible] = useState(false);
   const [patients, setPatients] = useState<Patient[]>([]);
   const [patient, setPatient] = useState<Patient>({} as Patient);
+  const [modalPatientInfo, setModalPatientInfo] = useState<boolean>(false);
 
   const handleAddAppointment = () => {
     setModalVisible(!modalVisible);
@@ -38,6 +41,10 @@ function App(): JSX.Element {
     if (!patientFiltered) return;
 
     setPatient(patientFiltered);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
   };
 
   const deletePatient = (id: string) => {
@@ -95,6 +102,8 @@ function App(): JSX.Element {
                 setModalVisible={setModalVisible}
                 editPatient={editPatient}
                 deletePatient={deletePatient}
+                setModalPatientInfo={setModalPatientInfo}
+                setPatient={setPatient}
               />
             )}
             keyExtractor={(item) => item.id}
@@ -105,14 +114,23 @@ function App(): JSX.Element {
         <Text style={styles.subTitle}>No hay citas</Text>
       )}
 
-      <Form
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-        patients={patients}
-        setPatients={setPatients}
-        patient={patient}
-        setPatient={setPatient}
-      />
+      {modalVisible && (
+        <Form
+          closeModal={closeModal}
+          patients={patients}
+          setPatients={setPatients}
+          patient={patient}
+          setPatient={setPatient}
+        />
+      )}
+
+      <Modal visible={modalPatientInfo} animationType="fade">
+        <PatientInfo
+          patient={patient}
+          setPatient={setPatient}
+          setModalPatientInfo={setModalPatientInfo}
+        />
+      </Modal>
     </SafeAreaView>
   );
 }

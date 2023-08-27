@@ -17,7 +17,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 
 type Props = {
   modalVisible: boolean;
-  setModalVisible: (modalVisible: boolean) => void;
+  closeModal: () => void;
   setPatients: (patients: Patient[]) => void;
   patients: Patient[];
   patient: Patient;
@@ -26,7 +26,7 @@ type Props = {
 
 const Form = ({
   modalVisible,
-  setModalVisible,
+  closeModal,
   setPatients,
   patients,
   patient: patientToEdit,
@@ -91,11 +91,11 @@ const Form = ({
     });
 
     // Close modal
-    setModalVisible(!modalVisible);
+    closeModal();
   };
 
   const handleCloseModal = () => {
-    setModalVisible(!modalVisible);
+    closeModal();
     setPatientToEdit({} as Patient);
     setId("");
     setPatient({

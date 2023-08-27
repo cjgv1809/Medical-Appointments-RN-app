@@ -1,46 +1,56 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import React from "react";
 import formatDate from "../../utils/formatDate";
-import { Pressable } from "react-native";
 
 type Props = {
   item: Patient;
   setModalVisible: (modalVisible: boolean) => void;
   editPatient: (id: string) => void;
   deletePatient: (id: string) => void;
+  setModalPatientInfo: (modalPatientInfo: boolean) => void;
+  setPatient: (patient: Patient) => void;
 };
 
 const Patient = ({
   item: { id, name, owner, date },
+  item,
   setModalVisible,
   editPatient,
   deletePatient,
+  setModalPatientInfo,
+  setPatient,
 }: Props) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.date}>{formatDate(date)}</Text>
-      <Text style={styles.label}>Paciente:</Text>
-      <View style={styles.textContainer}>
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.owner}>Propietario: {owner}</Text>
-      </View>
+    <Pressable
+      onLongPress={() => {
+        setModalPatientInfo(true);
+        setPatient(item);
+      }}>
+      <View style={styles.container}>
+        <Text style={styles.date}>{formatDate(date)}</Text>
+        <Text style={styles.label}>Paciente:</Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.owner}>Propietario: {owner}</Text>
+        </View>
 
-      <View style={[styles.textContainer, styles.btnContainer]}>
-        <Pressable
-          style={[styles.btn, styles.editBtn]}
-          onPress={() => {
-            setModalVisible(true);
-            editPatient(id);
-          }}>
-          <Text style={styles.btnText}>Editar</Text>
-        </Pressable>
-        <Pressable
-          style={[styles.btn, styles.deleteBtn]}
-          onPress={() => deletePatient(id)}>
-          <Text style={[styles.btnText, styles.deleteBtnText]}>Eliminar</Text>
-        </Pressable>
+        <View style={[styles.textContainer, styles.btnContainer]}>
+          <Pressable
+            style={[styles.btn, styles.editBtn]}
+            onPress={() => {
+              setModalVisible(true);
+              editPatient(id);
+            }}>
+            <Text style={styles.btnText}>Editar</Text>
+          </Pressable>
+          <Pressable
+            style={[styles.btn, styles.deleteBtn]}
+            onPress={() => deletePatient(id)}>
+            <Text style={[styles.btnText, styles.deleteBtnText]}>Eliminar</Text>
+          </Pressable>
+        </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
