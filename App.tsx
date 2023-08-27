@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Alert,
   Modal,
@@ -16,9 +16,10 @@ import {
   Text,
   useColorScheme,
   View,
+  FlatList,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Form from "./src/components/Form";
-import { FlatList } from "react-native";
 import Patient from "./src/components/Patient";
 import PatientInfo from "./src/components/PatientInfo";
 
@@ -28,6 +29,22 @@ function App(): JSX.Element {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [patient, setPatient] = useState<Patient>({} as Patient);
   const [modalPatientInfo, setModalPatientInfo] = useState<boolean>(false);
+
+  useEffect(() => {
+    const getPatientsFromStorage = async () => {
+      try {
+        const patientsStorage = await AsyncStorage.getItem("patients");
+
+        if (patientsStorage) {
+          setPatients(JSON.parse(patientsStorage));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getPatientsFromStorage();
+  }, []);
 
   const handleAddAppointment = () => {
     setModalVisible(!modalVisible);
@@ -64,10 +81,24 @@ function App(): JSX.Element {
             );
 
             setPatients(patientsFiltered);
+
+            // save patients in storage
+            savePatientsInStorage(patientsFiltered);
           },
         },
       ],
     );
+  };
+
+  const savePatientsInStorage = async (
+    patientsStorage: Patient[] | Patient,
+  ) => {
+    try {
+      const jsonPatients = JSON.stringify(patientsStorage);
+      await AsyncStorage.setItem("patients", jsonPatients);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -121,6 +152,7 @@ function App(): JSX.Element {
           setPatients={setPatients}
           patient={patient}
           setPatient={setPatient}
+          savePatientsInStorage={savePatientsInStorage}
         />
       )}
 

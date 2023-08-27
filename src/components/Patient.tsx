@@ -19,7 +19,7 @@ const Patient = ({
   deletePatient,
   setModalPatientInfo,
   setPatient,
-}: Props) => {
+}: Props): React.JSX.Element => {
   return (
     <Pressable
       onLongPress={() => {

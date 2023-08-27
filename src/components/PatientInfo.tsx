@@ -13,7 +13,7 @@ const PatientInfo = ({
   patient: { date, email, name, owner, symptoms, phone },
   setModalPatientInfo,
   setPatient,
-}: Props) => {
+}: Props): React.JSX.Element => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.cancelButtonContainer}>

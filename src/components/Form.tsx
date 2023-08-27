@@ -22,6 +22,7 @@ type Props = {
   patients: Patient[];
   patient: Patient;
   setPatient: (patient: Patient) => void;
+  savePatientsInStorage: (patients: Patient[]) => void;
 };
 
 const Form = ({
@@ -31,7 +32,8 @@ const Form = ({
   patients,
   patient: patientToEdit,
   setPatient: setPatientToEdit,
-}: Props) => {
+  savePatientsInStorage,
+}: Props): React.JSX.Element => {
   const [id, setId] = useState<string>("");
   const [patient, setPatient] = useState<Patient>({
     id: "",
@@ -46,7 +48,13 @@ const Form = ({
   useEffect(() => {
     if (Object.keys(patientToEdit).length !== 0) {
       setId(patientToEdit.id);
-      setPatient(patientToEdit);
+      // Convert the date string to a Date object
+      const editedDate = new Date(patientToEdit.date);
+
+      setPatient({
+        ...patientToEdit,
+        date: editedDate,
+      });
     }
   }, [patientToEdit]);
 
@@ -73,10 +81,16 @@ const Form = ({
 
       setPatients(patientsEdited);
       setPatientToEdit({} as Patient);
+
+      // Save patients in storage
+      savePatientsInStorage(patientsEdited);
     } else {
       // Add new patient
       newPatient.id = Date.now().toString();
       setPatients([...patients, newPatient]);
+
+      // Save patients in storage
+      savePatientsInStorage([...patients, newPatient]);
     }
 
     // Reset form
@@ -108,6 +122,9 @@ const Form = ({
       symptoms: "",
     });
   };
+
+  console.log("PATIENT", patient);
+  console.log("PATIENTS", patients);
 
   return (
     <Modal visible={modalVisible} animationType="slide">
