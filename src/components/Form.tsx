@@ -16,7 +16,7 @@ import DatePicker from "react-native-date-picker";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 type Props = {
-  modalVisible: boolean;
+  modalVisible?: boolean;
   closeModal: () => void;
   setPatients: (patients: Patient[]) => void;
   patients: Patient[];
