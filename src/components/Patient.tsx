@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     color: "#0d1b2a",
     fontSize: 16,
     fontWeight: "600",
-    marginBottom: 10,
   },
   name: {
     color: "#778da9",
