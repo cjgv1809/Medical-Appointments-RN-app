@@ -29,12 +29,12 @@ const Patient = ({
       <View style={styles.container}>
         <Text style={styles.date}>{formatDate(date)}</Text>
         <Text style={styles.label}>Paciente:</Text>
-        <View style={styles.textContainer}>
+        <View>
           <Text style={styles.name}>{name}</Text>
           <Text style={styles.owner}>Propietario: {owner}</Text>
         </View>
 
-        <View style={[styles.textContainer, styles.btnContainer]}>
+        <View style={styles.btnContainer}>
           <Pressable
             style={[styles.btn, styles.editBtn]}
             onPress={() => {
@@ -71,11 +71,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginBottom: 10,
   },
-  textContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
   name: {
     color: "#778da9",
     fontSize: 20,
@@ -106,6 +101,7 @@ const styles = StyleSheet.create({
   deleteBtn: {
     borderWidth: 1,
     borderColor: "#415a77",
+    marginTop: 10,
   },
   deleteBtnText: {
     color: "#415a77",
@@ -114,5 +110,6 @@ const styles = StyleSheet.create({
     color: "#e0e1dd",
     fontSize: 14,
     fontWeight: "700",
+    textAlign: "center",
   },
 });
