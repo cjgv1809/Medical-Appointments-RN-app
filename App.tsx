@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import {
   Pressable,
   SafeAreaView,
@@ -14,28 +14,42 @@ import {
   Text,
   useColorScheme,
   View,
-} from 'react-native';
-import Form from './src/components/Form';
+} from "react-native";
+import Form from "./src/components/Form";
+import { FlatList } from "react-native";
+import Patient from "./src/components/Patient";
 
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const isDarkMode = useColorScheme() === "dark";
   const [modalVisible, setModalVisible] = useState(false);
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [patient, setPatient] = useState<Patient>({} as Patient);
 
   const handleAddAppointment = () => {
-    setModalVisible(true);
+    setModalVisible(!modalVisible);
+  };
+
+  const editPatient = (id: string) => {
+    const patientFiltered = patients.find(
+      (patientToEdit) => patientToEdit.id === id,
+    );
+
+    if (!patientFiltered) return;
+
+    setPatient(patientFiltered);
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
       <View style={styles.content}>
         <Text style={styles.title}>Administrador de Citas</Text>
         <Text style={styles.subTitle}>Veterinaria</Text>
         <Pressable
           onPress={handleAddAppointment}
-          style={({pressed}) => [
+          style={({ pressed }) => [
             {
-              backgroundColor: pressed ? '#0d1b2a' : '#415a77',
+              backgroundColor: pressed ? "#0d1b2a" : "#415a77",
               paddingVertical: 10,
               paddingHorizontal: 20,
               borderRadius: 10,
@@ -46,37 +60,67 @@ function App(): JSX.Element {
         </Pressable>
       </View>
 
-      <Form modalVisible={modalVisible} />
+      {patients.length > 0 ? (
+        <View style={styles.patientContainer}>
+          <Text style={styles.subTitle}>Administra tus citas</Text>
+          <FlatList
+            data={patients}
+            renderItem={({ item }) => (
+              <Patient
+                item={item}
+                setModalVisible={setModalVisible}
+                editPatient={editPatient}
+              />
+            )}
+            keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
+          />
+        </View>
+      ) : (
+        <Text style={styles.subTitle}>No hay citas</Text>
+      )}
+
+      <Form
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        patients={patients}
+        setPatients={setPatients}
+        patient={patient}
+        setPatient={setPatient}
+      />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#e0e1dd',
+    backgroundColor: "#e0e1dd",
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     paddingHorizontal: 20,
   },
   content: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  patientContainer: {
+    marginVertical: 20,
+    flex: 1,
   },
   title: {
-    color: '#0d1b2a',
+    color: "#0d1b2a",
     fontSize: 30,
-    fontWeight: '600',
+    fontWeight: "600",
+    textAlign: "center",
   },
   subTitle: {
-    color: '#778da9',
+    color: "#778da9",
     fontSize: 24,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   buttonText: {
-    color: '#e0e1dd',
+    color: "#e0e1dd",
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: "700",
   },
 });
 
