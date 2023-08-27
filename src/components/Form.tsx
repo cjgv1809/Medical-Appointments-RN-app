@@ -92,8 +92,6 @@ const Form = ({
 
     // Close modal
     setModalVisible(!modalVisible);
-
-    console.log("patients", patients);
   };
 
   const handleCloseModal = () => {

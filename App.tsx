@@ -7,6 +7,7 @@
 
 import React, { useState } from "react";
 import {
+  Alert,
   Pressable,
   SafeAreaView,
   StatusBar,
@@ -37,6 +38,29 @@ function App(): JSX.Element {
     if (!patientFiltered) return;
 
     setPatient(patientFiltered);
+  };
+
+  const deletePatient = (id: string) => {
+    Alert.alert(
+      "Eliminar paciente",
+      "¿Estás seguro que quieres eliminar este paciente? Esta acción no se puede deshacer",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Si, Eliminar",
+          onPress: () => {
+            const patientsFiltered = patients.filter(
+              (patientToDelete) => patientToDelete.id !== id,
+            );
+
+            setPatients(patientsFiltered);
+          },
+        },
+      ],
+    );
   };
 
   return (
@@ -70,6 +94,7 @@ function App(): JSX.Element {
                 item={item}
                 setModalVisible={setModalVisible}
                 editPatient={editPatient}
+                deletePatient={deletePatient}
               />
             )}
             keyExtractor={(item) => item.id}

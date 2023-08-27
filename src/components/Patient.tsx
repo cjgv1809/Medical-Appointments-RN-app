@@ -7,12 +7,14 @@ type Props = {
   item: Patient;
   setModalVisible: (modalVisible: boolean) => void;
   editPatient: (id: string) => void;
+  deletePatient: (id: string) => void;
 };
 
 const Patient = ({
   item: { id, name, owner, date },
   setModalVisible,
   editPatient,
+  deletePatient,
 }: Props) => {
   return (
     <View style={styles.container}>
@@ -32,7 +34,9 @@ const Patient = ({
           }}>
           <Text style={styles.btnText}>Editar</Text>
         </Pressable>
-        <Pressable style={[styles.btn, styles.deleteBtn]}>
+        <Pressable
+          style={[styles.btn, styles.deleteBtn]}
+          onPress={() => deletePatient(id)}>
           <Text style={[styles.btnText, styles.deleteBtnText]}>Eliminar</Text>
         </Pressable>
       </View>
