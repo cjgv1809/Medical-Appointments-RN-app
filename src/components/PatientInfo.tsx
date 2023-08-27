@@ -2,6 +2,7 @@ import { SafeAreaView, StyleSheet, Text, View, Pressable } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import formatDate from "../../utils/formatDate";
+import { ScrollView } from "react-native";
 
 type Props = {
   patient: Patient;
@@ -16,44 +17,47 @@ const PatientInfo = ({
 }: Props): React.JSX.Element => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.cancelButtonContainer}>
-        <Pressable
-          style={styles.cancelButton}
-          onPress={() => {
-            setModalPatientInfo(false);
-            setPatient({} as Patient);
-          }}>
-          <Icon name="close" size={30} color="#e0e1dd" />
-        </Pressable>
-      </View>
-
-      <View style={styles.content}>
-        <Text style={styles.title}>Informacion sobre {name}</Text>
-        <View style={styles.cardContainer}>
-          <View style={styles.cardContainerSection}>
-            <Text style={styles.label}>Fecha:</Text>
-            <Text style={styles.text}>{formatDate(date)}</Text>
-          </View>
-          <View style={styles.cardContainerSection}>
-            <Text style={styles.label}>Propietario:</Text>
-            <Text style={styles.text}>{owner}</Text>
-          </View>
-          <View style={styles.cardContainerSection}>
-            <Text style={styles.label}>Email:</Text>
-            <Text style={styles.text}>{email}</Text>
-          </View>
-          <View style={styles.cardContainerSection}>
-            <Text style={styles.label}>Telefono:</Text>
-            <Text style={styles.text}>
-              {phone ? phone : "No proporcionado"}
-            </Text>
-          </View>
-          <View style={styles.cardContainerSection}>
-            <Text style={styles.label}>Sintomas:</Text>
-            <Text style={styles.text}>{symptoms}</Text>
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.cancelButtonContainer}>
+          <Pressable
+            style={styles.cancelButton}
+            onPress={() => {
+              setModalPatientInfo(false);
+              setPatient({} as Patient);
+            }}>
+            <Icon name="close" size={30} color="#e0e1dd" />
+          </Pressable>
+        </View>
+        <View style={styles.content}>
+          <Text style={styles.title}>Informacion sobre {name}</Text>
+          <View style={styles.cardContainer}>
+            <View style={styles.cardContainerSection}>
+              <Text style={styles.label}>Fecha:</Text>
+              <Text style={styles.text}>{formatDate(date)}</Text>
+            </View>
+            <View style={styles.cardContainerSection}>
+              <Text style={styles.label}>Propietario:</Text>
+              <Text style={styles.text}>{owner}</Text>
+            </View>
+            <View style={styles.cardContainerSection}>
+              <Text style={styles.label}>Email:</Text>
+              <Text style={styles.text}>{email}</Text>
+            </View>
+            <View style={styles.cardContainerSection}>
+              <Text style={styles.label}>Telefono:</Text>
+              <Text style={styles.text}>
+                {phone ? phone : "No proporcionado"}
+              </Text>
+            </View>
+            <View style={styles.cardContainerSection}>
+              <Text style={styles.label}>Sintomas:</Text>
+              <Text style={styles.text}>{symptoms}</Text>
+            </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
