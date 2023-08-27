@@ -74,7 +74,7 @@ function App(): JSX.Element {
           style: "cancel",
         },
         {
-          text: "Si, Eliminar",
+          text: "Sí, Eliminar",
           onPress: () => {
             const patientsFiltered = patients.filter(
               (patientToDelete) => patientToDelete.id !== id,
