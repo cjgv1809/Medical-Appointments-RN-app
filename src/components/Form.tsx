@@ -144,8 +144,8 @@ const Form = ({
             <View style={styles.field}>
               <Text style={styles.label}>Nombre del paciente</Text>
               <TextInput
-                placeholder="Ingrese nombre del paciente"
-                placeholderTextColor={"#8d99ae"}
+                placeholder="Ingrese nombre del paciente (Requerido)"
+                placeholderTextColor={"#a7adba"}
                 style={styles.input}
                 value={patient.name}
                 onChangeText={(text) =>
@@ -159,8 +159,8 @@ const Form = ({
             <View style={styles.field}>
               <Text style={styles.label}>Nombre del propietario</Text>
               <TextInput
-                placeholder="Ingrese nombre del propietario"
-                placeholderTextColor={"#8d99ae"}
+                placeholder="Ingrese nombre del propietario (Requerido)"
+                placeholderTextColor={"#a7adba"}
                 style={styles.input}
                 value={patient.owner}
                 onChangeText={(text) =>
@@ -174,8 +174,8 @@ const Form = ({
             <View style={styles.field}>
               <Text style={styles.label}>Email</Text>
               <TextInput
-                placeholder="Ingrese email"
-                placeholderTextColor={"#8d99ae"}
+                placeholder="Ingrese email (Requerido)"
+                placeholderTextColor={"#a7adba"}
                 style={styles.input}
                 keyboardType="email-address"
                 value={patient.email}
@@ -188,10 +188,10 @@ const Form = ({
               />
             </View>
             <View style={styles.field}>
-              <Text style={styles.label}>Telefono</Text>
+              <Text style={styles.label}>Teléfono</Text>
               <TextInput
-                placeholder="Ingrese telefono"
-                placeholderTextColor={"#8d99ae"}
+                placeholder="Ingrese teléfono"
+                placeholderTextColor={"#a7adba"}
                 style={styles.input}
                 keyboardType="phone-pad"
                 value={patient.phone}
@@ -222,10 +222,10 @@ const Form = ({
               </View>
             </View>
             <View style={styles.field}>
-              <Text style={styles.label}>Sintomas</Text>
+              <Text style={styles.label}>Síntomas</Text>
               <TextInput
-                placeholder="Ingrese sintomas"
-                placeholderTextColor={"#8d99ae"}
+                placeholder="Ingrese síntomas (Requerido)"
+                placeholderTextColor={"#a7adba"}
                 textAlignVertical="top"
                 style={[styles.input, styles.textarea]}
                 multiline

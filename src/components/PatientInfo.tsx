@@ -31,7 +31,7 @@ const PatientInfo = ({
           </Pressable>
         </View>
         <View style={styles.content}>
-          <Text style={styles.title}>Informacion sobre {name}</Text>
+          <Text style={styles.title}>Información sobre {name}</Text>
           <View style={styles.cardContainer}>
             <View style={styles.cardContainerSection}>
               <Text style={styles.label}>Fecha:</Text>
@@ -46,13 +46,13 @@ const PatientInfo = ({
               <Text style={styles.text}>{email}</Text>
             </View>
             <View style={styles.cardContainerSection}>
-              <Text style={styles.label}>Telefono:</Text>
+              <Text style={styles.label}>Teléfono:</Text>
               <Text style={styles.text}>
                 {phone ? phone : "No proporcionado"}
               </Text>
             </View>
             <View style={styles.cardContainerSection}>
-              <Text style={styles.label}>Sintomas:</Text>
+              <Text style={styles.label}>Síntomas:</Text>
               <Text style={styles.text}>{symptoms}</Text>
             </View>
           </View>
