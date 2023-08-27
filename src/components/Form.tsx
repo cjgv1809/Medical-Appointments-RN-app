@@ -123,9 +123,6 @@ const Form = ({
     });
   };
 
-  console.log("PATIENT", patient);
-  console.log("PATIENTS", patients);
-
   return (
     <Modal visible={modalVisible} animationType="slide">
       <SafeAreaView style={styles.content}>
