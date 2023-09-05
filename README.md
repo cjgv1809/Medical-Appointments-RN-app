@@ -77,3 +77,9 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+# Screenshots
+
+<img src="https://github.com/cjgv1809/Medical-Appointments-RN-app/assets/57246901/6032781e-ddc6-45e9-9aee-b62318603deb" width="250" height="500"/>
+
+<img src="https://github.com/cjgv1809/Medical-Appointments-RN-app/assets/57246901/906c9c97-d105-4ce0-a87f-43be3d662c2f" width="250" height="500"/>
